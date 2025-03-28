@@ -1,27 +1,29 @@
-//we have to create 3 stages that are checkout, build, test and deploy
-
 pipeline{
     agent any
-    stages {
-        stage('checkout'){
+    tools{
+        maven 'Maven'
+    }
+    stages{
+        stage('Build'){
             steps{
-                git url : 'https://github.com/Utkarsh-P-07/Test-2.0.git', branch : 'master'
+                sh 'mvn clean package'
             }
         }
-        stage('build'){
-            steps{
-                echo 'building'
+        stage('Test'){
+            steps {
+                sh 'mvn test'
             }
         }
-        stage('test'){
-            steps{
-                echo 'testing'
-            }
-        }
-        stage('deploy'){
-            steps{
-                echo 'deploying'
-            }
-        }
+        // stage('Run Jar'){
+        //     steps{
+        //         script{
+        //             //Run the jar file and capture the output
+        //             def output = sh(script: 'java -jar target/simple-java-project-1.0-SNAPSHOT.jar',)
+
+        //             //Print the output to Jenkins console
+        //             echo "Output from JAR: ${output}"
+        //         }
+        //     }
+        // }
     }
 }
