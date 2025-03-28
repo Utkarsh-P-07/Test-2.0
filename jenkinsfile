@@ -1,4 +1,4 @@
-//we have to create 3 stages that are checkout, build, test and deploy
+
 
 pipeline{
     agent any
